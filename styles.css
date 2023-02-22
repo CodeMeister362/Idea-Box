@@ -1,0 +1,44 @@
+body {
+  display: flex;
+  font-family: 'open sans', sans-serif;
+  margin: 0;
+}
+
+nav {
+  color: #e9e9f3;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 20vw;
+  background-color: #1f1f3d;
+}
+
+.header {
+  font-weight: bold;
+  padding-left: 5%;
+}
+
+.nav-box {
+  padding-left: 5%;
+  border: 1px #353567 solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 10%;
+}
+
+.nav-title {
+  font-size: small;
+  color: #bfbfdd;
+  margin-block: 0;
+}
+
+.show-btn {
+  padding: 5px;
+  width: 95%;
+  background-color: #5356a4;
+  border: #353567 solid 1px;
+  color: #e9e9f3;
+}
+
+
