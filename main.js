@@ -2,17 +2,17 @@ var savedBtn = document.querySelector('.js-save');
 var titleInput = document.querySelector('.js-title-input');
 var bodyInput = document.querySelector('.js-body-input');
 var ideaContainer = document.querySelector('.js-idea-container')
+var formContainer = document.querySelector('.js-form')
 
 var savedIdeas = [];
 
-bodyInput.addEventListener('input', activateSaveBtn)
-savedBtn.addEventListener('input', activateSaveBtn)
+formContainer.addEventListener('input', activateSaveBtn)
 
 savedBtn.addEventListener('click', function () {
     createIdea()
     clearInput()
     repopulateIdeaContainer()
-    toggleDisable()
+    savedBtn.disabled = true
 })
 
 
@@ -55,12 +55,12 @@ function repopulateIdeaContainer() {
 // addeventlistener checks if value is !== 0 
 //handler will change button class 
 
-function toggleDisable(){
-}
 
 function activateSaveBtn(){
     if (bodyInput.value !== "" && titleInput.value !== "" ) {
-        toggleDisable()
+        savedBtn.disabled = false;
+    } else {
+        savedBtn.disabled = true; 
     }
 }
 
