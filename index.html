@@ -13,18 +13,27 @@
         <button class="show-btn">Show Starred Ideas</button>
       </div>
     </nav>  
-    <section> 
-      <section>
-        <form>
-          <label for="title">Title</label>
-          <input type="text" class="input" id="title">
-          <label for="body">Body</label>
-          <input type="text" class="input" id="body">
-          <button class="save-btn">Save</button>
-          <input placeholder="Search Ideas" type="text" class="input" id="search">
+    <section class="main-container"> 
+      <section id="top-container">
+        <form class="form">
+          <div class="form-divs">
+            <p class="input-headers">Title</p>
+            <input type="text" class="input" id="title">
+          </div>
+          <div class="form-divs">
+            <p class="input-headers">Body</p>
+            <input type="text" class="input" id="body">
+          </div>
+          <div class="form-divs">
+            <button class="save-btn">Save</button>
+          </div>
+          <div class="form-divs" id="search-bar">
+            <img id="img-search" src="assests/search.svg">
+            <input placeholder="Search Ideas" type="text" class="input" id="search">
+          </div>
         </form>
       </section>
-      <section>
+      <section id="bottom-container">
         <div>
           <header>
             <img class="star">

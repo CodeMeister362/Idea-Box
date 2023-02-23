@@ -41,4 +41,85 @@ nav {
   color: #e9e9f3;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
+#top-container {
+    background-color: #a9aad2;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#bottom-container {
+    background-color: #eaeaf4;
+    height: 60%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    width: 50%;
+    height: 100%;
+}
+
+.input-headers {
+    margin-block: 0;
+    font-weight: 900;
+    padding: 5px 0px;
+}
+
+.form-divs {
+    width: 100%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+}
+
+input {
+    width: 100%;
+    border: 2px solid #1f1f3d;
+    border-radius: 3px;
+    padding: 0;
+    margin: 0;
+}
+
+#title {
+    height: 85%;
+}
+
+#body {
+    height: 150%;
+}
+
+.save-btn {
+    width: 101%;
+    background-color: #353567;
+    color: #eaeaf4;
+    border: 2px solid #5356a4;
+    height: 175%;
+    font-size: 18px;
+}
+
+#search-bar {
+    display: flex;
+    border: 2px solid #353567;
+    border-radius: 3px;
+}
+
+#search {
+    border: none;
+}
+
+#img-search {
+    width: 25px;
+    background-color: #353567;
+    padding: 8px;
+}
