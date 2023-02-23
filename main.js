@@ -1,17 +1,21 @@
-// const = require('./Idea');
-
 var savedBtn = document.querySelector('.js-save');
 var titleInput = document.querySelector('.js-title-input');
 var bodyInput = document.querySelector('.js-body-input');
 var ideaContainer = document.querySelector('.js-idea-container')
 
+var savedIdeas = [];
+
+bodyInput.addEventListener('input', activateSaveBtn)
+savedBtn.addEventListener('input', activateSaveBtn)
+
 savedBtn.addEventListener('click', function () {
     createIdea()
     clearInput()
     repopulateIdeaContainer()
+    toggleDisable()
 })
 
-var savedIdeas = [];
+
 
 function createIdea() {
     var title = titleInput.value;
@@ -32,7 +36,7 @@ function repopulateIdeaContainer() {
     for (var i = 0; i < savedIdeas.length; i++) {
  ////////// Update img star class //////////////////
         ideaContainer.innerHTML +=
-            `<div>
+            `<div id="${savedIdeas[i].id}">
                <header>
                 <img class="star">
                  <img class="delete">
@@ -43,3 +47,33 @@ function repopulateIdeaContainer() {
              </div>`
     }
 }
+
+// iteration 2.3
+// start with save button unclickable 
+// once both input fields have been filled 
+// make button clickable by changing the class 
+// addeventlistener checks if value is !== 0 
+//handler will change button class 
+
+function toggleDisable(){
+}
+
+function activateSaveBtn(){
+    if (bodyInput.value !== "" && titleInput.value !== "" ) {
+        toggleDisable()
+    }
+}
+
+//iteration 3.1
+// delete button will splice ideaInst out of array
+//capture eventtarget idea cards ID
+// iterate through array to find it using ID
+// splice it out
+// rerender ideas
+/// query selector on idea container
+// if event.garet.className === "delete" then reun the delete funciton
+// if savedIdeas[i].id === event.target.id { spliice(i,1)}
+// run re render 
+// if event.tagret.classname -=== "star"  then run the updateIDea()
+
+
