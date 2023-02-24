@@ -7,9 +7,7 @@ var formContainer = document.querySelector('.js-form')
 var savedIdeas = [];
 
 formContainer.addEventListener('input', activateSaveBtn)
-ideaContainer.addEventListener('click', function (event) {
-    deleteIdea()
-})
+ideaContainer.addEventListener('click', starORDelete)
 
 savedBtn.addEventListener('click', function () {
     createIdea()
@@ -30,22 +28,30 @@ function clearInput() {
     bodyInput.value = '';
 }
 
+function starORDelete(event) {
+    if (event.target.id === 'star') {
+        console.log ('STAR if')
+    } else if (event.target.id === 'delete') {
+        savedIdeas[findIndex()].deleteFromStorage(findIndex())
+        repopulateIdeaContainer()
+    }
+}
+
 function repopulateIdeaContainer() {
     event.preventDefault()
     ideaContainer.innerHTML = '';
-
     for (var i = 0; i < savedIdeas.length; i++) {
         ////////// Update img star class //////////////////
-        ideaContainer.innerHTML +=
-            `<div id="${savedIdeas[i].id}">
-               <header>
-                <img class="star">
-                <button class="js-delete" id="${savedIdeas[i].id}">delete</button>
-                </header>
-                <h1>${savedIdeas[i].title}</h1>
-                <p>${savedIdeas[i].body}</p>
-                <div class="comment">Comment</div>
-             </div>`
+        ideaContainer.innerHTML += `
+            <div class="card" id="${savedIdeas[i].id}">
+             <header class="card-header">
+               <img class="star js-star" id="star" src="assests/star.svg">
+               <img class="delete js-delete" id="delete" src="assests/delete.svg">
+             </header>
+             <p class="header card-title">${savedIdeas[i].title}</p>
+             <p class="card-text">${savedIdeas[i].body}</p>
+             <div class="comment"></div>
+           </div>`
     }
 }
 
@@ -69,16 +75,9 @@ function activateSaveBtn() {
 // run re render 
 // if event.tagret.classname -=== "star"  then run the updateIDea()
 
-function deleteIdea() {
-    if (event.target.classList.contains('js-delete')) {
-        savedIdeas[findIndex()].deleteFromStorage(findIndex())
-        repopulateIdeaContainer();
-    }
-}
-
 function findIndex() {
     for (var i = 0; i < savedIdeas.length; i++) {
-        if (savedIdeas[i].id === event.target.id) {
+        if (savedIdeas[i].id === event.target.parentElement.parentElement.id){ 
             return i
         }
     }
