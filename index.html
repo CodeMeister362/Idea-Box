@@ -7,7 +7,7 @@
   </head>
   <body>
     <nav>
-      <h1 class="header">IdeaBox</h1>
+      <p class="header">IdeaBox</p>
       <div class ="nav-box">
         <p class="nav-title">Filter Starred Ideas</p>
         <button class="show-btn">Show Starred Ideas</button>
@@ -22,7 +22,7 @@
           </div>
           <div class="form-divs">
             <p class="input-headers">Body</p>
-            <input type="text" class="js-body-input input" id="body">
+            <textarea class="js-body-input input" id="body"></textarea>
           </div>
           <div class="form-divs">
             <button class="js-save save-btn" disabled>Save</button>
@@ -34,13 +34,13 @@
         </form>
       </section>
       <section class='js-idea-container' id="bottom-container">
-        <div>
-          <header>
-            <img class="star">
-            <img class="delete">
+        <div class="card">
+          <header class="card-header">
+            <img class="star" src="assests/star.svg">
+            <img class="delete" src="assests/delete.svg">
           </header>
-          <h1>Idea Title</h1>
-          <p>Text text text</p>
+          <p class="header">Idea Title</p>
+          <p class="card-text">Text text text</p>
           <div class="comment">Comment</div>
         </div>
       </section>
