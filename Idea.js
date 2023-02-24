@@ -6,6 +6,14 @@ class Idea {
         this.star = false;
     }
 
+    saveToStorage(){
+        savedIdeas.unshift(this);
+    }
+
+    deleteFromStorage(index){
+        savedIdeas.splice(index,1)
+    }
+
     updateIdea() {
         this.star = !this.star
     }
