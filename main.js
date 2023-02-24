@@ -2,26 +2,27 @@ var savedBtn = document.querySelector('.js-save');
 var titleInput = document.querySelector('.js-title-input');
 var bodyInput = document.querySelector('.js-body-input');
 var ideaContainer = document.querySelector('.js-idea-container')
+var formContainer = document.querySelector('.js-form')
 
 var savedIdeas = [];
 
-bodyInput.addEventListener('input', activateSaveBtn)
-savedBtn.addEventListener('input', activateSaveBtn)
+formContainer.addEventListener('input', activateSaveBtn)
+ideaContainer.addEventListener('click', function (event) {
+    deleteIdea()
+})
 
 savedBtn.addEventListener('click', function () {
     createIdea()
     clearInput()
     repopulateIdeaContainer()
-    toggleDisable()
+    savedBtn.disabled = true
 })
-
-
 
 function createIdea() {
     var title = titleInput.value;
     var body = bodyInput.value;
     var newIdea = new Idea(title, body);
-    savedIdeas.unshift(newIdea);
+    newIdea.saveToStorage();
 }
 
 function clearInput() {
@@ -34,12 +35,12 @@ function repopulateIdeaContainer() {
     ideaContainer.innerHTML = '';
 
     for (var i = 0; i < savedIdeas.length; i++) {
- ////////// Update img star class //////////////////
+        ////////// Update img star class //////////////////
         ideaContainer.innerHTML +=
             `<div id="${savedIdeas[i].id}">
                <header>
                 <img class="star">
-                 <img class="delete">
+                <button class="js-delete" id="${savedIdeas[i].id}">delete</button>
                 </header>
                 <h1>${savedIdeas[i].title}</h1>
                 <p>${savedIdeas[i].body}</p>
@@ -48,19 +49,11 @@ function repopulateIdeaContainer() {
     }
 }
 
-// iteration 2.3
-// start with save button unclickable 
-// once both input fields have been filled 
-// make button clickable by changing the class 
-// addeventlistener checks if value is !== 0 
-//handler will change button class 
-
-function toggleDisable(){
-}
-
-function activateSaveBtn(){
-    if (bodyInput.value !== "" && titleInput.value !== "" ) {
-        toggleDisable()
+function activateSaveBtn() {
+    if (bodyInput.value !== "" && titleInput.value !== "") {
+        savedBtn.disabled = false;
+    } else {
+        savedBtn.disabled = true;
     }
 }
 
@@ -76,4 +69,17 @@ function activateSaveBtn(){
 // run re render 
 // if event.tagret.classname -=== "star"  then run the updateIDea()
 
+function deleteIdea() {
+    if (event.target.classList.contains('js-delete')) {
+        savedIdeas[findIndex()].deleteFromStorage(findIndex())
+        repopulateIdeaContainer();
+    }
+}
 
+function findIndex() {
+    for (var i = 0; i < savedIdeas.length; i++) {
+        if (savedIdeas[i].id === event.target.id) {
+            return i
+        }
+    }
+}
