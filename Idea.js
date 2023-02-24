@@ -16,5 +16,8 @@ class Idea {
 
     updateIdea() {
         this.star = !this.star
+        if (!this.star){
+        }
+
     }
 }

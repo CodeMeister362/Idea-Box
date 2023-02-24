@@ -36,7 +36,7 @@ nav {
   margin-block: 0;
 }
 
-.show-btn {
+.show-btn, .show-all-btn {
   padding: 5px;
   width: 95%;
   background-color: #5356a4;
