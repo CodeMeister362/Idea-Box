@@ -12,21 +12,33 @@ formContainer.addEventListener('input', activateSaveBtn);
 ideaContainer.addEventListener('click', starORDelete);
 showStarredBtn.addEventListener('click', filterStarred)
 showAllBtn.addEventListener('click', function(){
-    toggleStarORAllBtn("Show All")
+    toggleStarORAllBtn()
+    console.log(showAllBtn,"after")
+    console.log(showStarredBtn, "after")
     repopulateIdeaContainer()
 })
 
-function toggleStarORAllBtn(currentState){
-    if (currentState === "Show All"){
-        showAllBtn.classList.add('hidden')
+savedBtn.addEventListener('click', function () {
+    showAllBtn.classList.add('hidden');
+    showStarredBtn.classList.remove('hidden');
+    createIdea();
+    clearInput();
+    repopulateIdeaContainer();
+    savedBtn.disabled = true;
+})
+
+function toggleStarORAllBtn(){
+    if (showStarredBtn.classList.contains('hidden')) {
         showStarredBtn.classList.remove('hidden')
-    } else if (currentState === "Show Starred")
+        showAllBtn.classList.add('hidden')
+    } else if (!showStarredBtn.classList.contains('hidden')){
         showAllBtn.classList.remove('hidden')
         showStarredBtn.classList.add('hidden')
+    }
 }
 
 function filterStarred(){
-    toggleStarORAllBtn("Show Starred")
+    toggleStarORAllBtn()
     ideaContainer.innerHTML = ''
     for (var i = 0; i < savedIdeas.length; i++) {
         if (savedIdeas[i].star){
@@ -44,12 +56,6 @@ function filterStarred(){
     }
 }
 
-savedBtn.addEventListener('click', function () {
-    createIdea();
-    clearInput();
-    repopulateIdeaContainer();
-    savedBtn.disabled = true;
-})
 
 function createIdea() {
     var title = titleInput.value;
