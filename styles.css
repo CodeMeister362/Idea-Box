@@ -2,6 +2,7 @@ body {
   display: flex;
   font-family: 'open sans', sans-serif;
   margin: 0;
+  font-weight: lighter;
 }
 
 nav {
@@ -13,9 +14,11 @@ nav {
   background-color: #1f1f3d;
 }
 
-.header {
+.header,
+.save-btn {
   font-weight: bold;
   padding-left: 5%;
+  font-size: 18px;
 }
 
 .nav-box {
@@ -59,6 +62,9 @@ nav {
 #bottom-container {
     background-color: #eaeaf4;
     height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .form {
@@ -77,49 +83,107 @@ nav {
 }
 
 .form-divs {
-    width: 100%;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
-}
-
-input {
-    width: 100%;
-    border: 2px solid #1f1f3d;
-    border-radius: 3px;
-    padding: 0;
-    margin: 0;
-}
-
-#title {
-    height: 85%;
+    display: flex;
+    flex-direction: column;
 }
 
 #body {
-    height: 150%;
+    display: flex;
+    font-family: 'open sans', sans-serif;
+    height: 80px;
+}
+
+input, 
+textarea {
+    border: 2px solid #1f1f3d;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 0;
+    height: 40px;
 }
 
 .save-btn {
-    width: 101%;
     background-color: #353567;
     color: #eaeaf4;
     border: 2px solid #5356a4;
-    height: 175%;
-    font-size: 18px;
+    height: 40px;
+    padding: 0;
 }
 
 #search-bar {
     display: flex;
+    flex-direction: row;
     border: 2px solid #353567;
     border-radius: 3px;
 }
 
 #search {
     border: none;
+    width: 100%;
 }
 
 #img-search {
+    display: flex;
     width: 25px;
     background-color: #353567;
     padding: 8px;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: #1f1f3d solid 2px;
+  background-color: #ffffff;
+  margin: 20px;
+  border-radius: 2px;
+  justify-content: space-between;
+  max-height: 500px;
+  max-width: 250px;
+  position: relative;
+}
+
+.card-header, .comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px;
+  background-color: #1f1f3d;
+}
+
+.star, 
+.delete {
+  height: 25px;
+  background-color: #1f1f3d;
+}
+
+.card-text {
+  display: flex;
+  overflow-wrap: break-word;
+  font-size: 18px;
+  padding: 7px;
+  margin: 0;
+  min-height: 80px;
+}
+
+.hidden {
+  display: none;
+}
+
+.comment {
+  background-color: #5356a4;
+  border-top: 2px solid #1f1f3d;
+}
+
+.card-title {
+  position: absolute;
+  top: 20px;
+}
+
+button:hover,
+.star,
+.delete,
+.search-icon
+ {
+  cursor: pointer;
+}
+  
