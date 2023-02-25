@@ -5,17 +5,16 @@ var ideaContainer = document.querySelector('.js-idea-container');
 var formContainer = document.querySelector('.js-form');
 var showStarredBtn = document.querySelector('.js-show-btn');
 var showAllBtn = document.querySelector('.js-show-all-btn');
-var searchBar = document.querySelector('#search');
+var searchBar = document.querySelector('.search');
 
 var savedIdeas = [];
-// var pageState = "show-all";
-// ^ to track state of page (Star filtered view vs All view)
+var pageState = "show-all";
 
 formContainer.addEventListener('input', activateSaveBtn);
 ideaContainer.addEventListener('click', starORDelete);
-// searchBar.addEventListener('input', filterText);
+searchBar.addEventListener('input', filterText);
 showStarredBtn.addEventListener('click', filterStarred);
-showAllBtn.addEventListener('click', function(){
+showAllBtn.addEventListener('click', function() {
     toggleStarORAllBtn();
     repopulateIdeaContainer();
 });
@@ -31,35 +30,54 @@ savedBtn.addEventListener('click', function () {
 
 function filterText() {
     var currentSearch = searchBar.value.toLowerCase();
-    ideaContainer.innerHTML = '';
+    ideaContainer.innerHTML = ``;
 
-    // BUG: When you're viewing Saved Ideas and use the search bar, it searches
-    // thru the entire savedIdeas array instead of just the starred ideas.
-    // IDEA: Depending on current pageState, do either 1) loop thru the entire
-    // savedIdeas array like currently written
-    // OR 2) filter savedIdeas to this.star = true, save as a new "favorites" array, and loop thru "favorites" only
-    for (i = 0; i < savedIdeas.length; i++) {
-        var lowerSavedTitle = savedIdeas[i].title.toLowerCase();
-        var lowerSavedBody = savedIdeas[i].body.toLowerCase();
+    if (pageState === 'show-all') {
+        for (var i = 0; i < savedIdeas.length; i++) {
+            var lowerSavedTitle = savedIdeas[i].title.toLowerCase();
+            var lowerSavedBody = savedIdeas[i].body.toLowerCase();
 
-        if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
-            var starImage = '';
-            if (savedIdeas[i].star){
-                starImage = "assests/star-active.svg";
-            } else {
-                starImage = "assests/star.svg";
-            };
+            if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
+                ideaContainer.innerHTML += `
+                <div class="card" id="${savedIdeas[i].id}">
+                <header class="card-header">
+                    <img class="star js-star" id="star" src="${savedIdeas[i].starIcon()}">
+                    <img class="delete js-delete" id="delete" src="assests/delete.svg">
+                </header>
+                <div class="card-text-container">
+                    <h2 class="header card-title">${savedIdeas[i].title}</h2>
+                    <p class="card-text"> ${savedIdeas[i].body}</p>
+                </div>
+                <div class="comment"></div>
+                </div>`
+            }
+        };
+    } else if (pageState === 'show-starred') {
+        var starredIdeas = [];
+        for (var i = 0; i < savedIdeas.length; i++) {
+            if (savedIdeas[i].star) {
+              starredIdeas.push(savedIdeas[i])
+            }
+        }
 
-            ideaContainer.innerHTML += `
-            <div class="card" id="${savedIdeas[i].id}">
-             <header class="card-header">
-               <img class="star js-star" id="star" src="${starImage}">
-               <img class="delete js-delete" id="delete" src="assests/delete.svg">
-             </header>
-             <p class="header card-title">${savedIdeas[i].title}</p>
-             <p class="card-text">${savedIdeas[i].body}</p>
-             <div class="comment"></div>
-           </div>`
+        for (var i = 0; i < starredIdeas.length; i++) {
+            var lowerSavedTitle = starredIdeas[i].title.toLowerCase();
+            var lowerSavedBody = starredIdeas[i].body.toLowerCase();
+
+            if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
+                ideaContainer.innerHTML += `
+                <div class="card" id="${starredIdeas[i].id}">
+                <header class="card-header">
+                    <img class="star js-star" id="star" src="${starredIdeas[i].starIcon()}">
+                    <img class="delete js-delete" id="delete" src="assests/delete.svg">
+                </header>
+                <div class="card-text-container">
+                    <h2 class="header card-title">${starredIdeas[i].title}</h2>
+                    <p class="card-text"> ${starredIdeas[i].body}</p>
+                </div>
+                <div class="comment"></div>
+                </div>`
+            }
         };
     };
 };
@@ -72,32 +90,32 @@ function hide(element) {
     element.classList.add('hidden');
 };
 
-function toggleStarORAllBtn(){
+function toggleStarORAllBtn() {
     if (showStarredBtn.classList.contains('hidden')) {
         show(showStarredBtn);
         hide(showAllBtn);
-        // change pageState to "show-all" -> needed for search feature
-    } else if (!showStarredBtn.classList.contains('hidden')){
+        pageState = "show-all";
+    } else if (!showStarredBtn.classList.contains('hidden')) {
         show(showAllBtn);
         hide(showStarredBtn);
-        // change pageState to "show-starred" -> needed for search feature
+        pageState = "show-starred"
     };
 };
 
-function filterStarred(){
+function filterStarred() {
     toggleStarORAllBtn()
     var starredIdeas = [];
-    for (var i = 0; i < savedIdeas.length; i++){
+    for (var i = 0; i < savedIdeas.length; i++) {
         if(savedIdeas[i].star){
             starredIdeas.push(savedIdeas[i])
         }
     }
+    ideaContainer.innerHTML = ``;
     createCardHtml(starredIdeas)
 };
 
-function createCardHtml(array){
-    ideaContainer.innerHTML = '';
-    for (var i = 0; i < array.length; i++){
+function createCardHtml(array) {
+    for (var i = 0; i < array.length; i++) {
         ideaContainer.innerHTML += `
         <div class="card" id="${array[i].id}">
         <header class="card-header">
@@ -137,6 +155,7 @@ function starORDelete(event) {
 
 function repopulateIdeaContainer() {
     event.preventDefault();
+    ideaContainer.innerHTML = ``;
     createCardHtml(savedIdeas)
 };
 
@@ -155,21 +174,3 @@ function findIndex() {
         };
     };
 };
-
-// Would this function work for innerHTML refactoring?
-    // Call repopulateIdeas using the correct Ideas array (all vs favorites)
-    // and correct starImage (all view= keep current if statement to adjust,
-    // starred view= assign it to correct source link)
-
-// function repopulateIdeas(savedIdeas, starImage) {
-//     ideaContainer.innerHTML += `
-//             <div class="card" id="${savedIdeas[i].id}">
-//              <header class="card-header">
-//                <img class="star js-star" id="star" src="${starImage}">
-//                <img class="delete js-delete" id="delete" src="assests/delete.svg">
-//              </header>
-//              <p class="header card-title">${savedIdeas[i].title}</p>
-//              <p class="card-text">${savedIdeas[i].body}</p>
-//              <div class="comment"></div>
-//            </div>`
-// };
