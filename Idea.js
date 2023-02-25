@@ -4,20 +4,17 @@ class Idea {
         this.title = title;
         this.body = body;
         this.star = false;
-    }
+    };
 
     saveToStorage(){
         savedIdeas.unshift(this);
-    }
+    };
 
     deleteFromStorage(index){
-        savedIdeas.splice(index,1)
-    }
+        savedIdeas.splice(index,1);
+    };
 
     updateIdea() {
-        this.star = !this.star
-        if (!this.star){
-        }
-
-    }
-}
+        this.star = !this.star;
+    };
+};

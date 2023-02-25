@@ -195,8 +195,7 @@ textarea {
 
 button:hover,
 .star,
-.delete,
-.search-icon {
+.delete {
   cursor: pointer;
 }
 
