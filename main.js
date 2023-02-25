@@ -13,7 +13,7 @@ var savedIdeas = [];
 
 formContainer.addEventListener('input', activateSaveBtn);
 ideaContainer.addEventListener('click', starORDelete);
-searchBar.addEventListener('input', filterText);
+// searchBar.addEventListener('input', filterText);
 showStarredBtn.addEventListener('click', filterStarred);
 showAllBtn.addEventListener('click', function(){
     toggleStarORAllBtn();

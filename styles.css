@@ -35,13 +35,13 @@ h1 {
 .show-btn,
 .show-all-btn {
   font-weight: 600;
-  font-size: 18px;
-  padding-top: 4px;
-  height: 35px;
-  width: 200px;
+  font-size: 20px;
+  height: 45px;
+  width: 220px;
   background-color: #5356a4;
   border: #353567 solid 1px;
   color: #e9e9f3;
+  padding: 8px 10px 3px 10px;
 }
 
 .save-btn {
@@ -69,7 +69,7 @@ h1 {
   height: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -78,7 +78,7 @@ h1 {
   height: 60%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   overflow-y: auto;
 }
 
@@ -86,7 +86,6 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 50%;
   height: 100%;
 }
 
@@ -99,6 +98,7 @@ h1 {
 .form-divs {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .body-input {
@@ -115,6 +115,7 @@ textarea {
   height: 40px;
   width: 400px;
   font-family: 'Open Sans', sans-serif;
+  text-indent: 4px
 }
 
 .save-btn {
@@ -132,9 +133,13 @@ textarea {
   border: 2px solid #353567;
   border-radius: 3px;
   width: 410px;
+  align-items: center;
 }
-
+::placeholder {
+  color:#a9aad2
+}
 .search {
+  font-size: 18px;
   border: none;
   width: 400px;
 }
@@ -143,7 +148,7 @@ textarea {
   display: flex;
   width: 25px;
   background-color: #353567;
-  padding: 8px;
+  padding: 11px;
 }
 
 .card {
@@ -151,7 +156,7 @@ textarea {
   flex-direction: column;
   border: #1f1f3d solid 2px;
   background-color: #ffffff;
-  margin: 20px;
+  margin: 15px;
   border-radius: 2px;
   justify-content: space-between;
   height: 250px;
@@ -166,6 +171,7 @@ textarea {
   align-items: center;
   height: 25px;
   background-color: #1f1f3d;
+  padding: 1.5px;
 }
 
 .star,
@@ -176,11 +182,13 @@ textarea {
 
 .card-text {
   display: flex;
-  overflow-wrap: break-word;
-  font-size: 18px;
-  padding: 7px;
+  overflow-wrap: scroll;
+  overflow-y: auto;
+  font-size: 20px;
   margin: 0;
   min-height: 80px;
+  font-weight: 300;
+  margin: 5px
 }
 
 .comment {
@@ -189,9 +197,16 @@ textarea {
 }
 
 .card-title {
-  position: absolute;
-  top: 20px;
+  font-size: 22px;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }
+
+/* .card-title,
+.card-text {
+  padding-left: 15px;
+  color: #1f1f3d;
+} */
 
 button:hover,
 .star,
@@ -201,4 +216,9 @@ button:hover,
 
 .hidden {
   display: none;
+}
+.card-text-container{
+  height: 80%;
+  padding: 0px 20px 0px 15px;
+  color: #1f1f3d;
 }
