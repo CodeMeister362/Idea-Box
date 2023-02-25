@@ -202,23 +202,27 @@ textarea {
   margin-block-end: 0.5em;
 }
 
-/* .card-title,
-.card-text {
-  padding-left: 15px;
-  color: #1f1f3d;
-} */
-
 button:hover,
 .star,
 .delete {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
+button:disabled {
+  cursor: default;
 }
+
 .card-text-container{
   height: 80%;
   padding: 0px 20px 0px 15px;
   color: #1f1f3d;
+}
+
+.input-title-div {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.hidden {
+  display: none;
 }
