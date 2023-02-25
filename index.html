@@ -11,34 +11,33 @@
   <body>
     <nav>
       <h1>IdeaBox</h1>
-      <!-- <p class="header">IdeaBox</p> -->
-         <div class ="nav-box">
+        <div class ="nav-box">
         <p class="nav-title">Filter Starred Ideas</p>
         <button class="show-btn js-show-btn">Show Starred Ideas</button>
         <button class="show-all-btn js-show-all-btn hidden">Show All Ideas</button>
       </div>
     </nav>  
     <section class="main-container"> 
-      <section id="top-container">
+      <section class="top-container">
         <form class="js-form form">
           <div class="form-divs">
             <p class="input-headers">Title</p>
-            <input type="text" class="js-title-input input" id="title">
+            <input type="text" class="js-title-input title-input">
           </div>
           <div class="form-divs">
             <p class="input-headers">Body</p>
-            <textarea class="js-body-input input" id="body"></textarea>
+            <textarea class="js-body-input body-input"></textarea>
           </div>
           <div class="form-divs">
             <button class="js-save save-btn" disabled>Save</button>
           </div>
-          <div class="form-divs" id="search-bar">
-            <img class="search-icon" id="img-search" src="assests/search.svg">
-            <input placeholder="Search Ideas" type="text" class="input" id="search">
+          <div class="form-divs search-bar">
+            <img class="search-icon img-search" src="assests/search.svg">
+            <input placeholder="Search Ideas" type="text" class="input search">
           </div>
         </form>
       </section>
-      <section class='js-idea-container' id="bottom-container">
+      <section class='js-idea-container bottom-container'>
       </section>
     </section>
   </body>
