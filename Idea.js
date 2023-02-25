@@ -17,4 +17,12 @@ class Idea {
     updateIdea() {
         this.star = !this.star;
     };
+
+    starIcon() {
+        if(this.star) {
+            return "assests/star-active.svg"
+        } else {
+           return "assests/star.svg"
+        }
+    }
 };

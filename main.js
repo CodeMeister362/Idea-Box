@@ -17,8 +17,6 @@ ideaContainer.addEventListener('click', starORDelete);
 showStarredBtn.addEventListener('click', filterStarred);
 showAllBtn.addEventListener('click', function(){
     toggleStarORAllBtn();
-    // console.log(showAllBtn,"after");
-    // console.log(showStarredBtn, "after");
     repopulateIdeaContainer();
 });
 
@@ -88,22 +86,32 @@ function toggleStarORAllBtn(){
 
 function filterStarred(){
     toggleStarORAllBtn()
-    ideaContainer.innerHTML = ''
-    for (var i = 0; i < savedIdeas.length; i++) {
-        if (savedIdeas[i].star){
-            ideaContainer.innerHTML += `
-            <div class="card" id="${savedIdeas[i].id}">
-             <header class="card-header">
-               <img class="star js-star" id="star" src="assests/star-active.svg">
-               <img class="delete js-delete" id="delete" src="assests/delete.svg">
-             </header>
-             <p class="header card-title">${savedIdeas[i].title}</p>
-             <p class="card-text">${savedIdeas[i].body}</p>
-             <div class="comment"></div>
-           </div>`
-        };
-    };
+    var starredIdeas = [];
+    for (var i = 0; i < savedIdeas.length; i++){
+        if(savedIdeas[i].star){
+            starredIdeas.push(savedIdeas[i])
+        }
+    }
+    createCardHtml(starredIdeas)
 };
+
+function createCardHtml(array){
+    ideaContainer.innerHTML = '';
+    for (var i = 0; i < array.length; i++){
+        ideaContainer.innerHTML += `
+        <div class="card" id="${array[i].id}">
+        <header class="card-header">
+          <img class="star js-star" id="star" src="${array[i].starIcon()}">
+          <img class="delete js-delete" id="delete" src="assests/delete.svg">
+        </header>
+        <div class="card-text-container">
+          <h2 class="header card-title">${array[i].title}</h2>
+          <p class="card-text"> ${array[i].body}</p>
+        </div>
+        <div class="comment"></div>
+      </div>`
+    }
+}
 
 function createIdea() {
     var title = titleInput.value;
@@ -129,25 +137,7 @@ function starORDelete(event) {
 
 function repopulateIdeaContainer() {
     event.preventDefault();
-    ideaContainer.innerHTML = '';
-    var starImage = '';
-    for (var i = 0; i < savedIdeas.length; i++) {
-        if (savedIdeas[i].star){
-            starImage = "assests/star-active.svg"
-        } else {
-            starImage = "assests/star.svg"
-        };
-        ideaContainer.innerHTML += `
-            <div class="card" id="${savedIdeas[i].id}">
-             <header class="card-header">
-               <img class="star js-star" id="star" src="${starImage}">
-               <img class="delete js-delete" id="delete" src="assests/delete.svg">
-             </header>
-             <p class="header card-title">${savedIdeas[i].title}</p>
-             <p class="card-text">${savedIdeas[i].body}</p>
-             <div class="comment"></div>
-           </div>`
-    };
+    createCardHtml(savedIdeas)
 };
 
 function activateSaveBtn() {
