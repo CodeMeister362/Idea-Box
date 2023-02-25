@@ -1,34 +1,56 @@
 body {
   display: flex;
-  font-family: 'open sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
-  font-weight: lighter;
+  height: 100vh;
+  width: 100vw;
+  overflow: scroll;
 }
 
 nav {
   color: #e9e9f3;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 20vw;
+  height: 100%;
+  width: 325px;
   background-color: #1f1f3d;
 }
 
-.header,
+h1 {
+  font-size: 18px;
+  padding-left: 15px;
+}
+
+.nav-box {
+  padding-left: 15px;
+  border: 1px #353567;
+  border-style: solid none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 133px;
+}
+
+.show-btn,
+.show-all-btn {
+  font-weight: 500;
+  font-size: 18px;
+  padding-top: 4px;
+  height: 35px;
+  width: 200px;
+  background-color: #5356a4;
+  border: #353567 solid 1px;
+  color: #e9e9f3;
+}
+
 .save-btn {
   font-weight: bold;
   padding-left: 5%;
   font-size: 18px;
 }
 
-.nav-box {
-  padding-left: 5%;
-  border: 1px #353567 solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 10%;
-}
+
 
 .nav-title {
   font-size: small;
@@ -36,97 +58,94 @@ nav {
   margin-block: 0;
 }
 
-.show-btn, .show-all-btn {
-  padding: 5px;
-  width: 95%;
-  background-color: #5356a4;
-  border: #353567 solid 1px;
-  color: #e9e9f3;
-}
+
 
 .main-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 #top-container {
-    background-color: #a9aad2;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+  background-color: #a9aad2;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #bottom-container {
-    background-color: #eaeaf4;
-    height: 60%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  background-color: #eaeaf4;
+  height: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow-y: auto;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: stretch;
-    width: 50%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+  width: 50%;
+  height: 100%;
 }
 
 .input-headers {
-    margin-block: 0;
-    font-weight: 900;
-    padding: 5px 0px;
+  margin-block: 0;
+  font-weight: 900;
+  padding: 5px 0px;
 }
 
 .form-divs {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #body {
-    display: flex;
-    font-family: 'open sans', sans-serif;
-    height: 80px;
+  display: flex;
+  font-family: 'open sans', sans-serif;
+  height: 80px;
 }
 
-input, 
+input,
 textarea {
-    border: 2px solid #1f1f3d;
-    border-radius: 3px;
-    padding: 3px;
-    margin: 0;
-    height: 40px;
+  border: 2px solid #1f1f3d;
+  border-radius: 3px;
+  padding: 3px;
+  margin: 0;
+  height: 40px;
 }
 
 .save-btn {
-    background-color: #353567;
-    color: #eaeaf4;
-    border: 2px solid #5356a4;
-    height: 40px;
-    padding: 0;
+  background-color: #353567;
+  color: #eaeaf4;
+  border: 2px solid #5356a4;
+  height: 40px;
+  padding: 0;
 }
 
 #search-bar {
-    display: flex;
-    flex-direction: row;
-    border: 2px solid #353567;
-    border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #353567;
+  border-radius: 3px;
 }
 
 #search {
-    border: none;
-    width: 100%;
+  border: none;
+  width: 100%;
 }
 
 #img-search {
-    display: flex;
-    width: 25px;
-    background-color: #353567;
-    padding: 8px;
+  display: flex;
+  width: 25px;
+  background-color: #353567;
+  padding: 8px;
 }
 
 .card {
@@ -137,12 +156,13 @@ textarea {
   margin: 20px;
   border-radius: 2px;
   justify-content: space-between;
-  max-height: 500px;
-  max-width: 250px;
+  height: 250px;
+  width: 250px;
   position: relative;
 }
 
-.card-header, .comment {
+.card-header,
+.comment {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -150,7 +170,7 @@ textarea {
   background-color: #1f1f3d;
 }
 
-.star, 
+.star,
 .delete {
   height: 25px;
   background-color: #1f1f3d;
@@ -163,10 +183,6 @@ textarea {
   padding: 7px;
   margin: 0;
   min-height: 80px;
-}
-
-.hidden {
-  display: none;
 }
 
 .comment {
@@ -182,8 +198,10 @@ textarea {
 button:hover,
 .star,
 .delete,
-.search-icon
- {
+.search-icon {
   cursor: pointer;
 }
-  
+
+.hidden {
+  display: none;
+}
