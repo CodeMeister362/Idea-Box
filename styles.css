@@ -135,9 +135,11 @@ textarea {
   width: 410px;
   align-items: center;
 }
+
 ::placeholder {
   color:#a9aad2
 }
+
 .search {
   font-size: 18px;
   border: none;
@@ -223,6 +225,7 @@ button:disabled {
   justify-content: flex-start;
   width: 100%;
 }
+
 .hidden {
   display: none;
 }
