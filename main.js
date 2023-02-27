@@ -69,6 +69,7 @@ function hide(element) {
 };
 
 function toggleStarORAllBtn() {
+    clearInput()
     if (showStarredBtn.classList.contains('hidden')) {
         show(showStarredBtn);
         hide(showAllBtn);
@@ -122,6 +123,7 @@ function createIdea() {
 function clearInput() {
     titleInput.value = '';
     bodyInput.value = '';
+    searchBar.value = '';
 };
 
 function starORDelete(event) {
