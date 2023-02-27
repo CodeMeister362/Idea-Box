@@ -20,7 +20,7 @@ For a deeper review of the application:
 
 ### Context:
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
-This project was completed during our fourth week at the Turing School over 5 days. 
+This project was completed over 5 days during our fourth week at the Turing School. 
 
 ### Contributors:
 [//]: <> (Who worked on this application? Link to their GitHubs.)
