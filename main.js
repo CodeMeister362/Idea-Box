@@ -38,46 +38,24 @@ function filterText() {
             var lowerSavedBody = savedIdeas[i].body.toLowerCase();
 
             if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
-                ideaContainer.innerHTML += `
-                <div class="card" id="${savedIdeas[i].id}">
-                <header class="card-header">
-                    <img class="star js-star" id="star" src="${savedIdeas[i].starIcon()}">
-                    <img class="delete js-delete" id="delete" src="assests/delete.svg">
-                </header>
-                <div class="card-text-container">
-                    <h2 class="header card-title">${savedIdeas[i].title}</h2>
-                    <p class="card-text"> ${savedIdeas[i].body}</p>
-                </div>
-                <div class="comment"></div>
-                </div>`
-            }
+                createCardHtml(savedIdeas[i]);
+            };
         };
     } else if (pageState === 'show-starred') {
         var starredIdeas = [];
         for (var i = 0; i < savedIdeas.length; i++) {
             if (savedIdeas[i].star) {
-              starredIdeas.push(savedIdeas[i])
-            }
-        }
+                starredIdeas.push(savedIdeas[i])
+            };
+        };
 
         for (var i = 0; i < starredIdeas.length; i++) {
             var lowerSavedTitle = starredIdeas[i].title.toLowerCase();
             var lowerSavedBody = starredIdeas[i].body.toLowerCase();
 
             if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
-                ideaContainer.innerHTML += `
-                <div class="card" id="${starredIdeas[i].id}">
-                <header class="card-header">
-                    <img class="star js-star" id="star" src="${starredIdeas[i].starIcon()}">
-                    <img class="delete js-delete" id="delete" src="assests/delete.svg">
-                </header>
-                <div class="card-text-container">
-                    <h2 class="header card-title">${starredIdeas[i].title}</h2>
-                    <p class="card-text"> ${starredIdeas[i].body}</p>
-                </div>
-                <div class="comment"></div>
-                </div>`
-            }
+                createCardHtml(starredIdeas[i]);
+            };
         };
     };
 };
@@ -103,33 +81,36 @@ function toggleStarORAllBtn() {
 };
 
 function filterStarred() {
-    toggleStarORAllBtn()
+    toggleStarORAllBtn();
     var starredIdeas = [];
-    for (var i = 0; i < savedIdeas.length; i++) {
-        if(savedIdeas[i].star){
-            starredIdeas.push(savedIdeas[i])
-        }
-    }
     ideaContainer.innerHTML = ``;
-    createCardHtml(starredIdeas)
+
+    for (var i = 0; i < savedIdeas.length; i++) {
+        if(savedIdeas[i].star) {
+            starredIdeas.push(savedIdeas[i])
+        };
+    };
+
+    for (var i = 0; i < starredIdeas.length; i++) {
+        createCardHtml(starredIdeas[i])
+    };
 };
 
-function createCardHtml(array) {
-    for (var i = 0; i < array.length; i++) {
+function createCardHtml(individualCard) {
         ideaContainer.innerHTML += `
-        <div class="card" id="${array[i].id}">
+        <div class="card" id="${individualCard.id}">
         <header class="card-header">
-          <img class="star js-star" id="star" src="${array[i].starIcon()}">
+          <img class="star js-star" id="star" src="${individualCard.starIcon()}">
           <img class="delete js-delete" id="delete" src="assests/delete.svg">
         </header>
         <div class="card-text-container">
-          <h2 class="header card-title">${array[i].title}</h2>
-          <p class="card-text"> ${array[i].body}</p>
+          <h2 class="header card-title">${individualCard.title}</h2>
+          <p class="card-text"> ${individualCard.body}</p>
         </div>
         <div class="comment"></div>
-      </div>`
-    }
-}
+      </div>
+      `
+};
 
 function createIdea() {
     var title = titleInput.value;
@@ -156,7 +137,10 @@ function starORDelete(event) {
 function repopulateIdeaContainer() {
     event.preventDefault();
     ideaContainer.innerHTML = ``;
-    createCardHtml(savedIdeas)
+
+    for (var i = 0; i < savedIdeas.length; i++) {
+        createCardHtml(savedIdeas[i])
+    };
 };
 
 function activateSaveBtn() {
