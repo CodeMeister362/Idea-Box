@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Idea Box!</title>
-  <meta charset="utf-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <nav>
-    <h1>IdeaBox</h1>
-    <div class="nav-box">
-      <p class="nav-title">Filter Starred Ideas</p>
-      <button class="show-btn js-show-btn">Show Starred Ideas</button>
-      <button class="show-all-btn js-show-all-btn hidden">Show All Ideas</button>
-    </div>
-  </nav>
-  <section class="main-container">
-    <section class="top-container">
-      <form class="js-form form">
-        <div class="form-divs">
-          <p class="input-headers">Title</p>
-          <input type="text" class="js-title-input title-input">
-        </div>
-        <div class="form-divs">
-          <p class="input-headers">Body</p>
-          <textarea class="js-body-input body-input"></textarea>
-        </div>
-        <div class="form-divs">
-          <button class="js-save save-btn" disabled>Save</button>
-        </div>
-        <div class="form-divs search-bar">
-          <img class="img-search" src="assests/search.svg">
-          <input placeholder="Search Ideas" type="text" class="input search">
-        </div>
-      </form>
+  <head>
+    <title>Idea Box!</title>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <nav>
+      <h1>IdeaBox</h1>
+      <section class="nav-box">
+        <p class="nav-title">Filter Starred Ideas</p>
+        <button class="show-btn js-show-btn">Show Starred Ideas</button>
+        <button class="show-all-btn js-show-all-btn hidden">Show All Ideas</button>
+      </section>
+    </nav>
+    <section class="main-container">
+      <section class="top-container">
+        <form class="js-form form">
+          <div class="form-divs">
+            <p class="input-headers">Title</p>
+            <input type="text" class="js-title-input title-input">
+          </div>
+          <div class="form-divs">
+            <p class="input-headers">Body</p>
+            <textarea class="js-body-input body-input"></textarea>
+          </div>
+          <div class="form-divs">
+            <button class="js-save save-btn" disabled>Save</button>
+          </div>
+          <div class="form-divs search-bar">
+            <img class="img-search" src="assests/search.svg">
+            <input placeholder="Search Ideas" type="text" class="input search">
+          </div>
+        </form>
+      </section>
+      <section class='js-idea-container bottom-container'>
+      </section>
     </section>
-    <section class='js-idea-container bottom-container'>
-    </section>
-  </section>
-</body>
-<script type="text/javascript" src="./idea.js"></script>
-<script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./idea.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+  </body>
 </html>
