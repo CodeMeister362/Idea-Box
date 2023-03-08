@@ -9,11 +9,11 @@ var searchBar = document.querySelector('.search');
 
 var savedIdeas = [];
 
-formContainer.addEventListener('input', activateSaveBtn);
 ideaContainer.addEventListener('click', starORDelete);
 showStarredBtn.addEventListener('click', filterStarred);
 showAllBtn.addEventListener('click', showAllIdeas);
 savedBtn.addEventListener('click', saveNewIdea);
+formContainer.addEventListener('input', activateSaveBtn);
 searchBar.addEventListener('input', filterText);
 
 function activateSaveBtn() {
@@ -21,54 +21,7 @@ function activateSaveBtn() {
         savedBtn.disabled = false;
     } else {
         savedBtn.disabled = true;
-    };
-};
-
-function starORDelete(event) {
-    if (event.target.id === 'star') {
-        savedIdeas[findIndex()].updateIdea(findIndex());
-
-        if (showStarredBtn.classList.contains('hidden')) {
-            repopulateIdeaContainer(createStarredList());
-        } else {
-            repopulateIdeaContainer(savedIdeas)
-        }
-
-    } else if (event.target.id === 'delete') {
-        savedIdeas[findIndex()].deleteFromStorage(findIndex());
-        
-        if (showStarredBtn.classList.contains('hidden')) {
-            repopulateIdeaContainer(createStarredList());
-        } else {
-            repopulateIdeaContainer(savedIdeas)
-        }
-    };
-};
-
-function filterStarred() {
-    toggleStarORAllBtn()
-    updateSearchPlaceholder('Search Starred Ideas')
-    createCardHtml(createStarredList())
-};
-
-function createStarredList() {
-    var starredIdeas = [];
-    for (var i = 0; i < savedIdeas.length; i++) {
-        if (savedIdeas[i].star) {
-            starredIdeas.push(savedIdeas[i]);
-        }
-    } return starredIdeas
-}
-
-function showAllIdeas() {
-    toggleStarORAllBtn();
-    updateSearchPlaceholder('Search Ideas')
-    repopulateIdeaContainer(savedIdeas);
-}
-
-function updateSearchPlaceholder (text){
-    searchBar.value ='';
-    searchBar.placeholder = `${text}`;
+    }
 }
 
 function saveNewIdea() {
@@ -78,33 +31,6 @@ function saveNewIdea() {
     clearInput();
     repopulateIdeaContainer(savedIdeas);
     savedBtn.disabled = true;
-}
-
-function filterText() {
-    var currentSearch = searchBar.value.toLowerCase();
-    var results = []
-
-    for (i = 0; i < savedIdeas.length; i++) {
-        var lowerSavedTitle = savedIdeas[i].title.toLowerCase();
-        var lowerSavedBody = savedIdeas[i].body.toLowerCase();
-
-        if ((lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) && !showStarredBtn.classList.contains('hidden')) {
-            results.push(savedIdeas[i])
-        } else if ((lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) && showStarredBtn.classList.contains('hidden') && savedIdeas[i].star) {
-            results.push(savedIdeas[i])
-        } else {
-            ideaContainer.innerHTML = '';
-        }
-    };
-    createCardHtml(results)
-}
-
-function findIndex() {
-    for (var i = 0; i < savedIdeas.length; i++) {
-        if (savedIdeas[i].id === event.target.parentElement.parentElement.id) {
-            return i;
-        }
-    }
 }
 
 function createIdea() {
@@ -121,29 +47,12 @@ function clearInput() {
 
 function repopulateIdeaContainer(ideas) {
     event.preventDefault();
-    createCardHtml(ideas)
-}
-
-function show(element) {
-    element.classList.remove('hidden');
-}
-
-function hide(element) {
-    element.classList.add('hidden');
-}
-
-function toggleStarORAllBtn() {
-    if (showStarredBtn.classList.contains('hidden')) {
-        show(showStarredBtn);
-        hide(showAllBtn);
-    } else if (!showStarredBtn.classList.contains('hidden')) {
-        show(showAllBtn);
-        hide(showStarredBtn);
-    }
+    createCardHtml(ideas);
 }
 
 function createCardHtml(ideas) {
     ideaContainer.innerHTML = '';
+
     for (var i = 0; i < ideas.length; i++) {
         ideaContainer.innerHTML += `
         <div class="card" id="${ideas[i].id}">
@@ -156,6 +65,91 @@ function createCardHtml(ideas) {
           <p class="card-text"> ${ideas[i].body}</p>
         </div>
         <div class="comment"></div>
-      </div>`
+      </div>`;
     }
+}
+
+function showAllIdeas() {
+    toggleStarORAllBtn();
+    updateSearchPlaceholder('Search Ideas');
+    repopulateIdeaContainer(savedIdeas);
+}
+
+function filterStarred() {
+    toggleStarORAllBtn();
+    updateSearchPlaceholder('Search Starred Ideas');
+    createCardHtml(createStarredList());
+}
+
+function toggleStarORAllBtn() {
+    if (showStarredBtn.classList.contains('hidden')) {
+        show(showStarredBtn);
+        hide(showAllBtn);
+    } else if (!showStarredBtn.classList.contains('hidden')) {
+        show(showAllBtn);
+        hide(showStarredBtn);
+    }
+}
+
+function updateSearchPlaceholder(text) {
+    searchBar.value = '';
+    searchBar.placeholder = `${text}`;
+}
+
+function createStarredList() {
+    var starredIdeas = [];
+    for (var i = 0; i < savedIdeas.length; i++) {
+        if (savedIdeas[i].star) {
+            starredIdeas.push(savedIdeas[i]);
+        }
+    } return starredIdeas;
+}
+
+function starORDelete(event) {
+    if (event.target.id === 'star') {
+        savedIdeas[findIndex()].updateIdea(findIndex());
+    } else if (event.target.id === 'delete') {
+        savedIdeas[findIndex()].deleteFromStorage(findIndex());
+    }
+
+    if (showStarredBtn.classList.contains('hidden')) {
+        repopulateIdeaContainer(createStarredList());
+    } else {
+        repopulateIdeaContainer(savedIdeas);
+    }
+}
+
+function findIndex() {
+    for (var i = 0; i < savedIdeas.length; i++) {
+        if (savedIdeas[i].id === event.target.parentElement.parentElement.id) {
+            return i;
+        }
+    }
+}
+
+function filterText() {
+    var currentSearch = searchBar.value.toLowerCase();
+    var results = [];
+
+    for (i = 0; i < savedIdeas.length; i++) {
+        var lowerSavedTitle = savedIdeas[i].title.toLowerCase();
+        var lowerSavedBody = savedIdeas[i].body.toLowerCase();
+
+        if ((lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) && !showStarredBtn.classList.contains('hidden')) {
+            results.push(savedIdeas[i]);
+        } else if ((lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) && showStarredBtn.classList.contains('hidden') && savedIdeas[i].star) {
+            results.push(savedIdeas[i])
+        } else {
+            ideaContainer.innerHTML = '';
+        }
+    }
+    createCardHtml(results);
+}
+
+function show(element) {
+    element.classList.remove('hidden');
+}
+
+function hide(element) {
+    element.classList.add('hidden');
 }
