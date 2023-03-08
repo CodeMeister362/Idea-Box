@@ -15,7 +15,12 @@ class Idea {
     };
 
     updateIdea() {
-        this.star = !this.star;
+        if(this.star){
+            this.star = false;
+        } else {
+            this.star = true;
+        }
+        
     };
 
     starIcon() {
