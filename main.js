@@ -8,122 +8,20 @@ var showAllBtn = document.querySelector('.js-show-all-btn');
 var searchBar = document.querySelector('.search');
 
 var savedIdeas = [];
-var pageState = "show-all";
 
 formContainer.addEventListener('input', activateSaveBtn);
 ideaContainer.addEventListener('click', starORDelete);
-searchBar.addEventListener('input', filterText);
 showStarredBtn.addEventListener('click', filterStarred);
-showAllBtn.addEventListener('click', function() {
-    toggleStarORAllBtn();
-    repopulateIdeaContainer();
-});
+showAllBtn.addEventListener('click', showAllIdeas);
+savedBtn.addEventListener('click', saveNewIdea);
+searchBar.addEventListener('input', filterText);
 
-savedBtn.addEventListener('click', function () {
-    hide(showAllBtn);
-    show(showStarredBtn);
-    createIdea();
-    clearInput();
-    repopulateIdeaContainer();
-    savedBtn.disabled = true;
-});
-
-function filterText() {
-    var currentSearch = searchBar.value.toLowerCase();
-    ideaContainer.innerHTML = ``;
-
-    if (pageState === 'show-all') {
-        for (var i = 0; i < savedIdeas.length; i++) {
-            var lowerSavedTitle = savedIdeas[i].title.toLowerCase();
-            var lowerSavedBody = savedIdeas[i].body.toLowerCase();
-
-            if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
-                createCardHtml(savedIdeas[i]);
-            };
-        };
-    } else if (pageState === 'show-starred') {
-        var starredIdeas = [];
-        for (var i = 0; i < savedIdeas.length; i++) {
-            if (savedIdeas[i].star) {
-                starredIdeas.push(savedIdeas[i])
-            };
-        };
-
-        for (var i = 0; i < starredIdeas.length; i++) {
-            var lowerSavedTitle = starredIdeas[i].title.toLowerCase();
-            var lowerSavedBody = starredIdeas[i].body.toLowerCase();
-
-            if (lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) {
-                createCardHtml(starredIdeas[i]);
-            };
-        };
+function activateSaveBtn() {
+    if (bodyInput.value !== "" && titleInput.value !== "") {
+        savedBtn.disabled = false;
+    } else {
+        savedBtn.disabled = true;
     };
-};
-
-function show(element) {
-    element.classList.remove('hidden');
-};
-
-function hide(element) {
-    element.classList.add('hidden');
-};
-
-function toggleStarORAllBtn() {
-    clearInput()
-    if (showStarredBtn.classList.contains('hidden')) {
-        show(showStarredBtn);
-        hide(showAllBtn);
-        pageState = "show-all";
-    } else if (!showStarredBtn.classList.contains('hidden')) {
-        show(showAllBtn);
-        hide(showStarredBtn);
-        pageState = "show-starred"
-    };
-};
-
-function filterStarred() {
-    toggleStarORAllBtn();
-    var starredIdeas = [];
-    ideaContainer.innerHTML = ``;
-
-    for (var i = 0; i < savedIdeas.length; i++) {
-        if(savedIdeas[i].star) {
-            starredIdeas.push(savedIdeas[i])
-        };
-    };
-
-    for (var i = 0; i < starredIdeas.length; i++) {
-        createCardHtml(starredIdeas[i])
-    };
-};
-
-function createCardHtml(individualCard) {
-        ideaContainer.innerHTML += `
-        <div class="card" id="${individualCard.id}">
-        <header class="card-header">
-          <img class="star js-star" id="star" src="${individualCard.starIcon()}">
-          <img class="delete js-delete" id="delete" src="assests/delete.svg">
-        </header>
-        <div class="card-text-container">
-          <h2 class="header card-title">${individualCard.title}</h2>
-          <p class="card-text"> ${individualCard.body}</p>
-        </div>
-        <div class="comment"></div>
-      </div>
-      `
-};
-
-function createIdea() {
-    var title = titleInput.value;
-    var body = bodyInput.value;
-    var newIdea = new Idea(title, body);
-    newIdea.saveToStorage();
-};
-
-function clearInput() {
-    titleInput.value = '';
-    bodyInput.value = '';
-    searchBar.value = '';
 };
 
 function starORDelete(event) {
@@ -136,27 +34,106 @@ function starORDelete(event) {
     };
 };
 
-function repopulateIdeaContainer() {
-    event.preventDefault();
-    ideaContainer.innerHTML = ``;
-
+function filterStarred() {
+    toggleStarORAllBtn()
+    var starredIdeas = [];
     for (var i = 0; i < savedIdeas.length; i++) {
-        createCardHtml(savedIdeas[i])
-    };
+        if (savedIdeas[i].star) {
+            starredIdeas.push(savedIdeas[i])
+        }
+    }
+    createCardHtml(starredIdeas)
 };
 
-function activateSaveBtn() {
-    if (bodyInput.value !== "" && titleInput.value !== "") {
-        savedBtn.disabled = false;
-    } else {
-        savedBtn.disabled = true;
+function showAllIdeas() {
+    toggleStarORAllBtn();
+    repopulateIdeaContainer();
+}
+
+function saveNewIdea() {
+    hide(showAllBtn);
+    show(showStarredBtn);
+    createIdea();
+    clearInput();
+    repopulateIdeaContainer();
+    savedBtn.disabled = true;
+}
+
+function filterText() {
+    var currentSearch = searchBar.value.toLowerCase();
+    var results = []
+
+    for (i = 0; i < savedIdeas.length; i++) {
+        var lowerSavedTitle = savedIdeas[i].title.toLowerCase();
+        var lowerSavedBody = savedIdeas[i].body.toLowerCase();
+        if ((lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) && !showStarredBtn.classList.contains('hidden')) {
+            results.push(savedIdeas[i])
+        } else if ((lowerSavedTitle.includes(currentSearch) || lowerSavedBody.includes(currentSearch)) && showStarredBtn.classList.contains('hidden') && savedIdeas[i].star) {
+            results.push(savedIdeas[i])
+        } else {
+            ideaContainer.innerHTML = '';
+        }
     };
+    createCardHtml(results)
 };
 
 function findIndex() {
     for (var i = 0; i < savedIdeas.length; i++) {
-        if (savedIdeas[i].id === event.target.parentElement.parentElement.id){ 
+        if (savedIdeas[i].id === event.target.parentElement.parentElement.id) {
             return i;
         };
     };
+};
+
+function createIdea() {
+    var title = titleInput.value;
+    var body = bodyInput.value;
+    var newIdea = new Idea(title, body);
+    newIdea.saveToStorage();
+};
+
+function clearInput() {
+    titleInput.value = '';
+    bodyInput.value = '';
+};
+
+function repopulateIdeaContainer() {
+    event.preventDefault();
+    createCardHtml(savedIdeas)
+};
+
+function show(element) {
+    element.classList.remove('hidden');
+};
+
+function hide(element) {
+    element.classList.add('hidden');
+};
+
+function toggleStarORAllBtn() {
+    if (showStarredBtn.classList.contains('hidden')) {
+        show(showStarredBtn);
+        hide(showAllBtn);
+    } else if (!showStarredBtn.classList.contains('hidden')) {
+        show(showAllBtn);
+        hide(showStarredBtn);
+    };
+};
+
+function createCardHtml(ideas) {
+    ideaContainer.innerHTML = '';
+    for (var i = 0; i < ideas.length; i++) {
+        ideaContainer.innerHTML += `
+        <div class="card" id="${ideas[i].id}">
+        <header class="card-header">
+          <img class="star js-star" id="star" src="${ideas[i].starIcon()}">
+          <img class="delete js-delete" id="delete" src="assests/delete.svg">
+        </header>
+        <div class="card-text-container">
+          <h2 class="header card-title">${ideas[i].title}</h2>
+          <p class="card-text"> ${ideas[i].body}</p>
+        </div>
+        <div class="comment"></div>
+      </div>`
+    }
 };
