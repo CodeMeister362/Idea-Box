@@ -90,7 +90,6 @@ h1 {
 }
 
 .input-headers {
-  width: 100%;
   margin-block: 0;
   font-weight: 900;
   padding: 5px 0px;
@@ -136,9 +135,11 @@ textarea {
   width: 410px;
   align-items: center;
 }
+
 ::placeholder {
   color:#a9aad2
 }
+
 .search {
   font-size: 18px;
   border: none;
@@ -151,8 +152,6 @@ textarea {
   background-color: #353567;
   padding: 11px;
 }
-
-
 
 .card {
   display: flex;
@@ -167,26 +166,25 @@ textarea {
   position: relative;
 }
 
+.star,
+.delete,
+.card-header,
+.comment {
+  height: 25px;
+  background-color: #1f1f3d;
+}
+
 .card-header,
 .comment {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 25px;
-  background-color: #1f1f3d;
   padding: 1.5px;
 }
 
-.star,
-.delete {
-  height: 25px;
-  background-color: #1f1f3d;
-}
-
-.card-text-container{
-  height: 80%;
-  padding: 0px 20px 0px 15px;
-  color: #1f1f3d;
+.comment {
+  background-color: #5356a4;
+  border-top: 2px solid #1f1f3d;
 }
 
 .card-text {
@@ -195,21 +193,21 @@ textarea {
   overflow-y: auto;
   font-size: 20px;
   margin: 0;
-  width: 100%;
   min-height: 80px;
   font-weight: 300;
-}
-
-.comment {
-  background-color: #5356a4;
-  border-top: 2px solid #1f1f3d;
+  margin: 5px
 }
 
 .card-title {
   font-size: 22px;
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
-  width: 100%;
+}
+
+.card-text-container{
+  height: 80%;
+  padding: 0px 20px 0px 15px;
+  color: #1f1f3d;
 }
 
 button:hover,
